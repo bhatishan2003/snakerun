@@ -1,62 +1,49 @@
-# 🐍 Snake Game (Curses-based)
+# 🐍 Snake Game (Curses-based) <!-- omit in toc -->
 
 A classic Snake game implemented in **Python** using the `curses` library.
 Supports **colors, keyboard controls (WASD/Arrow keys), scoring, restart, and game-over screen**.
 
----
-
 ## Table of Contents <!-- omit in toc -->
 
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Development Notes](#development-notes)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Development Notes](#development-notes)
 
 ---
 
 ## Installation
 
-1. **Create a Virtual Environment [Optional, but recommended]**
-
-    Run the following command to create a [virtual environment](https://docs.python.org/3/library/venv.html):
+-   From PyPi
 
     ```bash
-    python3 -m venv .venv
+    pip install snakify
     ```
 
-    - **Activate:**
-
-        - **Windows (PowerShell):**
-
-        ```bash
-        .venv\Scripts\activate
-        ```
-
-        - **Linux/Mac (Bash):**
-
-        ```bash
-        source .venv/bin/activate
-        ```
-
-    - **Deactivate:**
-        ```bash
-        deactivate
-        ```
-
-2. **Install Dependencies**
+-   From Source :
 
     ```bash
-    pip install -r requirements.txt
+    git clone https://github.com/bhatishan2003/snakify.git
+    cd snakify
+    pip install .
     ```
 
 ## Usage
 
-Run the following command to play the game.
+Run the following command in the terminal to play the game.
 
 ```bash
-python snake_game.py
+snakify
 ```
 
+![Snake Game Demo](assets/demo.gif)
+
 ## Development Notes
+
+-   For development (editable mode), do following installation:
+
+    ```bash
+    pip install -e .
+    ```
 
 -   Pre-commit
 
