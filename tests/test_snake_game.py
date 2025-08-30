@@ -255,5 +255,3 @@ if __name__ == "__main__":
     test_game_sequence()
 
     print("All tests passed!")
-
-    # Or run with pytest: pytest test_functional_snake.py -v
