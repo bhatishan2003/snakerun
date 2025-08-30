@@ -7,7 +7,6 @@ Supports **colors, keyboard controls (WASD/Arrow keys), scoring, restart, and ga
 
 ## Table of Contents <!-- omit in toc -->
 
-- [🐍 Snake Game (Curses-based)](#-snake-game-curses-based)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Development Notes](#development-notes)
