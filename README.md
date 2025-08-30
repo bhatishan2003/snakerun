@@ -1,8 +1,16 @@
+# 🐍 Snake Game (Curses-based)
+
+A classic Snake game implemented in **Python** using the `curses` library.
+Supports **colors, keyboard controls (WASD/Arrow keys), scoring, restart, and game-over screen**.
+
+---
+
 ## Table of Contents <!-- omit in toc -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development Notes](#development-notes)
+- [🐍 Snake Game (Curses-based)](#-snake-game-curses-based)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Development Notes](#development-notes)
 
 ---
 
