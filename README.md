@@ -46,9 +46,26 @@ snakify
 
 -   For development (editable mode), do following installation:
 
-    ```bash
-    pip install -e .
-    ```
+    -   Core only:
+
+        ```bash
+        pip install -e .
+        ```
+
+    -   With tests:
+        ```bash
+        pip install -e .[test]
+        ```
+    -   With dev tools:
+
+        ```bash
+        pip install -e .[dev]
+        ```
+
+    -   All dependencies (test + dev):
+        ```bash
+        pip install -e .[all]
+        ```
 
 -   Pre-commit
 

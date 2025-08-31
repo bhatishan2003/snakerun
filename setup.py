@@ -1,12 +1,21 @@
 from setuptools import setup, find_packages
+import os
 
-# Read README.md for long description
+
+# Helper function to read requirements files
+def read_requirements(filename):
+    with open(os.path.join("requirements", filename), "r", encoding="utf-8") as fh:
+        return fh.read().splitlines()
+
+
+# Long description from README.md
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-# Read requirements.txt for dependencies
-with open("requirements.txt", "r", encoding="utf-8") as fh:
-    requirements = fh.read().splitlines()
+# Read requirement sets
+install_requires = read_requirements("requirements.txt")
+test_requires = read_requirements("requirements_test.txt")
+dev_requires = read_requirements("requirements_dev.txt")
 
 setup(
     name="snakify",
@@ -17,7 +26,12 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
-    install_requires=requirements,
+    install_requires=install_requires,
+    extras_require={
+        "test": test_requires,
+        "dev": dev_requires,
+        "all": test_requires + dev_requires,
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
