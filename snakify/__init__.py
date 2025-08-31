@@ -1,4 +1,3 @@
-
 import curses
 import random
 import time
@@ -7,9 +6,11 @@ from collections import deque
 import os
 import sys
 
+
 class SnakeGame:
-    def __init__(self,):
-        
+    def __init__(
+        self,
+    ):
         # Game dimensions
         self.width = 40
         self.height = 20
@@ -38,11 +39,11 @@ class SnakeGame:
         terminal_width = size.columns
         terminal_height = size.lines
 
-        if terminal_height < self.height+4 or terminal_width < self.width+4:
+        if terminal_height < self.height + 4 or terminal_width < self.width + 4:
             print(
-            f"Terminal too small! Minimum required: "
-            f"{self.height+4}x{self.width+4}, "
-            f"Current: {terminal_height}x{terminal_width}"
+                f"Terminal too small! Minimum required: "
+                f"{self.height+4}x{self.width+4}, "
+                f"Current: {terminal_height}x{terminal_width}"
             )
             print("Please expand terminal size")
             sys.exit(1)
@@ -66,7 +67,7 @@ class SnakeGame:
         curses.init_pair(5, curses.COLOR_YELLOW, -1)  # Game over text (yellow)
 
         # Create game window with border
-        self.game_win = curses.newwin(self.height + 2, self.width + 2 ,2, 2)
+        self.game_win = curses.newwin(self.height + 2, self.width + 2, 2, 2)
         self.game_win.keypad(True)
         self.game_win.nodelay(True)
 
@@ -276,7 +277,6 @@ class SnakeGame:
         self.game_win.refresh()
 
     def run(self):
-
         # Validate terminal size
         try:
             # Show welcome screen
@@ -316,4 +316,3 @@ class SnakeGame:
         curses.echo()
         curses.curs_set(1)
         curses.endwin()
-
