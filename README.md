@@ -10,9 +10,9 @@ A classic Snake game implemented in **Python** and played via cli.
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development Notes](#development-notes)
+-   [Installation](#installation)
+-   [Usage](#usage)
+-   [Development Notes](#development-notes)
 
 ---
 
@@ -41,49 +41,3 @@ snakify
 ```
 
 ![Snake Game Demo](assets/demo.gif)
-
-## Development Notes
-
--   For development (editable mode), do following installation:
-
-    -   Core only:
-
-        ```bash
-        pip install -e .
-        ```
-
-    -   With tests:
-        ```bash
-        pip install -e .[test]
-        ```
-    -   With dev tools:
-
-        ```bash
-        pip install -e .[dev]
-        ```
-
-    -   All dependencies (test + dev):
-        ```bash
-        pip install -e .[all]
-        ```
-
--   Pre-commit
-
-    We use pre-commit to automate linting of our codebase.
-
-    -   Install hooks:
-        ```bash
-        pre-commit install
-        ```
-    -   Run Hooks manually (optional):
-        ```bash
-        pre-commit run --all-files
-        ```
-
--   Ruff:
-
-    -   Lint and format:
-        ```bash
-        ruff check --fix
-        ruff format
-        ```
