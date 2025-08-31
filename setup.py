@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 import os
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-# Helper function to read requirements files
+
 def read_requirements(filename):
-    with open(os.path.join("requirements", filename), "r", encoding="utf-8") as fh:
+    with open(os.path.join(BASE_DIR, "requirements", filename), "r", encoding="utf-8") as fh:
         return fh.read().splitlines()
 
 
@@ -53,4 +54,5 @@ setup(
         ],
     },
     keywords="snake game python cli",
+    include_package_data=True,
 )
