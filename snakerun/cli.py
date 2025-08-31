@@ -1,4 +1,4 @@
-from snakify import SnakeGame
+from snakerun import SnakeGame
 
 
 def main():
