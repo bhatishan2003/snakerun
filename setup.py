@@ -20,7 +20,7 @@ dev_requires = read_requirements("requirements_dev.txt")
 
 setup(
     name="snakerun",
-    version="0.0.1",
+    version="0.0.2",
     author="Ishan Bhat",
     author_email="ishan2003bhat@gmail.com",
     description="A Python based CLI game for playing classical snake game",
