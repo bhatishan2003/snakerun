@@ -48,3 +48,18 @@ Please follow these steps to set up your development environment and keep contri
         ruff check --fix
         ruff format
         ```
+
+## Release Notes
+
+-   Install twine/build dependancies
+    ```bash
+    python -m pip install --upgrade build twine
+    ```
+-   Build
+    ```bash
+    python -m build
+    ```
+-   Upload
+    ```bash
+    python -m twine upload dist/*
+    ```
