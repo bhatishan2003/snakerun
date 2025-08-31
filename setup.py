@@ -19,7 +19,7 @@ test_requires = read_requirements("requirements_test.txt")
 dev_requires = read_requirements("requirements_dev.txt")
 
 setup(
-    name="snakify",
+    name="snakerun",
     version="0.0.1",
     author="Ishan Bhat",
     author_email="ishan2003bhat@gmail.com",
@@ -50,7 +50,7 @@ setup(
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
-            "snakify=snakify.cli:main",
+            "snakerun=snakerun.cli:main",
         ],
     },
     keywords="snake game python cli",

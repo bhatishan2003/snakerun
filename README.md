@@ -1,18 +1,17 @@
-# Snakify <!-- omit in toc -->
+# Snakerun <!-- omit in toc -->
 
 A classic Snake game implemented in **Python** and played via cli.
 
-[![PyPI version](https://img.shields.io/pypi/v/snakify.svg?color=blue)](https://pypi.org/project/snakify/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/snakify.svg)](https://pypi.org/project/snakify/)
-[![License](https://img.shields.io/github/license/bhatishan2003/snakify)](LICENSE)
-[![Python application](https://github.com/bhatishan2003/snakify/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhatishan2003/snakify/actions/workflows/python-app.yml)
-[![Coverage](https://img.shields.io/codecov/c/github/bhatishan2003/snakify)](https://codecov.io/gh/bhatishan2003/snakify)
+[![PyPI version](https://img.shields.io/pypi/v/snakerun.svg?color=blue)](https://pypi.org/project/snakerun/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/snakerun.svg)](https://pypi.org/project/snakerun/)
+[![License](https://img.shields.io/github/license/bhatishan2003/snakerun)](LICENSE)
+[![Python application](https://github.com/bhatishan2003/snakerun/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhatishan2003/snakerun/actions/workflows/python-app.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/bhatishan2003/snakerun)](https://codecov.io/gh/bhatishan2003/snakerun)
 
 ## Table of Contents <!-- omit in toc -->
 
--   [Installation](#installation)
--   [Usage](#usage)
--   [Development Notes](#development-notes)
+- [Installation](#installation)
+- [Usage](#usage)
 
 ---
 
@@ -21,14 +20,14 @@ A classic Snake game implemented in **Python** and played via cli.
 -   From PyPi
 
     ```bash
-    pip install snakify
+    pip install snakerun
     ```
 
 -   From Source :
 
     ```bash
-    git clone https://github.com/bhatishan2003/snakify.git
-    cd snakify
+    git clone https://github.com/bhatishan2003/snakerun.git
+    cd snakerun
     pip install .
     ```
 
@@ -37,7 +36,7 @@ A classic Snake game implemented in **Python** and played via cli.
 Run the following command in the terminal to play the game.
 
 ```bash
-snakify
+snakerun
 ```
 
 ![Snake Game Demo](assets/demo.gif)
