@@ -49,8 +49,18 @@ Please follow these steps to set up your development environment and keep contri
         ruff format
         ```
 
+## Testing
+
+Run following command to check test cases.
+
+```bash
+pip install -e .[test]
+pytest -v
+```
+
 ## Release Notes
 
+-   Always run test cases.
 -   Install twine/build dependancies
     ```bash
     python -m pip install --upgrade build twine
