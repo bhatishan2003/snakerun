@@ -3,8 +3,7 @@ import random
 import time
 import threading
 from collections import deque
-import os
-import sys
+import shutil
 
 
 class SnakeGame:
@@ -27,26 +26,25 @@ class SnakeGame:
         # Game speed (delay between moves in milliseconds)
         self.delay = 150
         # Clear terminal
-        os.system("cls" if os.name == "nt" else "clear")
+        # os.system("cls" if os.name == "nt" else "clear")
         self.window_terminal_validity()
-
         # Initialize curses
         self.init_curses()
 
     def window_terminal_validity(self):
         # Re-check dimensions (in case terminal was resized)
-        size = os.get_terminal_size()
+
+        size = shutil.get_terminal_size(fallback=(80, 24))
         terminal_width = size.columns
         terminal_height = size.lines
 
         if terminal_height < self.height + 4 or terminal_width < self.width + 4:
-            print(
+            raise Exception(
                 f"Terminal too small! Minimum required: "
                 f"{self.height+4}x{self.width+4}, "
-                f"Current: {terminal_height}x{terminal_width}"
+                f"Current: {terminal_height}x{terminal_width}\n"
+                "Please expand terminal size"
             )
-            print("Please expand terminal size")
-            sys.exit(1)
 
     def init_curses(self):
         """Initialize the curses display"""
@@ -176,31 +174,27 @@ class SnakeGame:
     def handle_input(self):
         """Handle keyboard input in a separate thread"""
         while self.running:
-            try:
-                key = self.game_win.getch()
+            key = self.game_win.getch()
 
-                if key != -1:  # Key was pressed
-                    # Convert to uppercase for consistency
-                    if key in [ord("w"), ord("W"), curses.KEY_UP]:
-                        if self.direction != "DOWN":
-                            self.next_direction = "UP"
-                    elif key in [ord("s"), ord("S"), curses.KEY_DOWN]:
-                        if self.direction != "UP":
-                            self.next_direction = "DOWN"
-                    elif key in [ord("a"), ord("A"), curses.KEY_LEFT]:
-                        if self.direction != "RIGHT":
-                            self.next_direction = "LEFT"
-                    elif key in [ord("d"), ord("D"), curses.KEY_RIGHT]:
-                        if self.direction != "LEFT":
-                            self.next_direction = "RIGHT"
-                    elif key in [ord("q"), ord("Q")]:
-                        self.running = False
-                        self.game_over = True
-                    elif key in [ord("r"), ord("R")] and self.game_over:
-                        self.restart_game()
-
-            except curses.error:
-                pass
+            if key != -1:  # Key was pressed
+                # Convert to uppercase for consistency
+                if key in [ord("w"), ord("W"), curses.KEY_UP]:
+                    if self.direction != "DOWN":
+                        self.next_direction = "UP"
+                elif key in [ord("s"), ord("S"), curses.KEY_DOWN]:
+                    if self.direction != "UP":
+                        self.next_direction = "DOWN"
+                elif key in [ord("a"), ord("A"), curses.KEY_LEFT]:
+                    if self.direction != "RIGHT":
+                        self.next_direction = "LEFT"
+                elif key in [ord("d"), ord("D"), curses.KEY_RIGHT]:
+                    if self.direction != "LEFT":
+                        self.next_direction = "RIGHT"
+                elif key in [ord("q"), ord("Q")]:
+                    self.running = False
+                    self.game_over = True
+                elif key in [ord("r"), ord("R")] and self.game_over:
+                    self.restart_game()
 
             time.sleep(0.01)  # Small delay to prevent excessive CPU usage
 
