@@ -10,8 +10,8 @@ A classic Snake game implemented in **Python** and played via cli.
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Installation](#installation)
-- [Usage](#usage)
+-   [Installation](#installation)
+-   [Usage](#usage)
 
 ---
 
@@ -39,4 +39,4 @@ Run the following command in the terminal to play the game.
 snakerun
 ```
 
-![Snake Game Demo](assets/demo.gif)
+![Snake Game Demo](https://raw.githubusercontent.com/bhatishan2003/snakerun/main/assets/demo.gif)
