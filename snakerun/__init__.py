@@ -23,20 +23,20 @@ class SnakeGame:
         delay (int): Delay between snake moves in milliseconds.
         stdscr (curses.window): The main curses screen.
         game_win (curses.window): Window displaying the game area.
+        test_mode (bool): Whether running in test mode (no curses initialization).
     """
 
-    def __init__(
-        self,
-    ):
+    def __init__(self, test_mode=False):
         """
         Initialize the Snake game with default settings.
+
+        Args:
+            test_mode (bool): If True, skip curses initialization for testing.
+
         Sets up game dimensions, initial snake state, score, and
-        initializes the curses display. Also validates terminal size.
+        initializes the curses display (unless in test mode). Also validates terminal size.
         """
-        # Re-check dimensions (in case terminal was resized)
-
         # Game dimensions
-
         self.width = 40
         self.height = 20
 
@@ -48,14 +48,18 @@ class SnakeGame:
         self.score = 0
         self.game_over = False
         self.running = True
+        self.test_mode = test_mode
 
         # Game speed (delay between moves in milliseconds)
         self.delay = 150
-        # Clear terminal
-        # os.system("cls" if os.name == "nt" else "clear")
-        self.window_terminal_validity()
-        # Initialize curses
-        self.init_curses()
+
+        # Initialize curses and UI elements only if not in test mode
+        self.stdscr = None
+        self.game_win = None
+
+        if not test_mode:
+            self.window_terminal_validity()
+            self.init_curses()
 
     def window_terminal_validity(self):
         """
@@ -88,11 +92,22 @@ class SnakeGame:
         Initialize the curses display and configure game window.
 
         Sets up:
-            - Main screen
-            - Input and display options
-            - Color pairs for snake, food, border, and texts
+            - Main screen with proper input/output settings
+            - Input and display options (no echo, non-blocking input)
+            - Color pairs for snake, food, border, and text elements
+            - Game window with borders and keypad support
             - Non-blocking input for real-time gameplay
+
+        Color pairs defined:
+            1: Green snake on default background
+            2: Red food on default background
+            3: Green border on default background
+            4: White text on default background
+            5: Yellow game over text on default background
         """
+        if self.test_mode:
+            return
+
         self.stdscr = curses.initscr()
         curses.noecho()
         curses.cbreak()
@@ -126,6 +141,9 @@ class SnakeGame:
         formatting to make it clearly visible and distinguish the
         game area from the surrounding terminal space.
         """
+        if self.test_mode or not self.game_win:
+            return
+
         self.game_win.attron(curses.color_pair(3) | curses.A_BOLD)
         self.game_win.border()
         self.game_win.attroff(curses.color_pair(3) | curses.A_BOLD)
@@ -173,6 +191,9 @@ class SnakeGame:
         segments in the snake deque and draws them at their respective
         coordinates within the game window.
         """
+        if self.test_mode or not self.game_win:
+            return
+
         for segment in self.snake:
             x, y = segment
             self.game_win.addch(y, x, "█", curses.color_pair(1) | curses.A_BOLD)
@@ -186,6 +207,9 @@ class SnakeGame:
         (self.food is not None), positioning it at the stored
         coordinates within the game window.
         """
+        if self.test_mode or not self.game_win:
+            return
+
         if self.food:
             x, y = self.food
             self.game_win.addch(y, x, "●", curses.color_pair(2) | curses.A_BOLD)
@@ -203,6 +227,9 @@ class SnakeGame:
         - Text length for proper alignment
         - Border spacing for clean layout
         """
+        if self.test_mode or not self.stdscr:
+            return
+
         score_text = f"Score: {self.score}"
         # Position: bottom right corner outside the game border
         score_y = 2 + self.height + 2  # Below the game window
@@ -223,6 +250,8 @@ class SnakeGame:
         in white text, providing players with easily accessible
         reference for game controls.
         """
+        if self.test_mode or not self.stdscr:
+            return
 
         instructions = ["Use WASD or Arrow Keys to move", "Press 'q' to quit", "Press 'r' to restart"]
 
@@ -246,7 +275,6 @@ class SnakeGame:
         Updates score and respawns food when food is consumed.
         Implements speed increase mechanism for progressive difficulty.
         """
-
         head_x, head_y = self.snake[0]
 
         # Calculate new head position
@@ -291,6 +319,10 @@ class SnakeGame:
         Collision detection includes:
         - Wall collision: position is at or beyond game area boundaries
         - Self collision: position overlaps with any part of snake body
+
+        The method checks boundaries against the playable area (excluding
+        the border positions) and iterates through the snake deque to
+        detect self-intersection.
         """
         x, y = position
 
@@ -324,6 +356,8 @@ class SnakeGame:
         Input is case-insensitive. Includes small delay to prevent
         excessive CPU usage while maintaining responsiveness.
         """
+        if self.test_mode or not self.game_win:
+            return
 
         while self.running:
             key = self.game_win.getch()
@@ -362,8 +396,11 @@ class SnakeGame:
         - Resets game speed to initial value
         - Reinitializes snake position
         - Spawns new food
-        """
 
+        This method is called when the player presses 'R' during
+        the game over screen, allowing for immediate replay without
+        restarting the entire program.
+        """
         self.snake.clear()
         self.score = 0
         self.direction = "RIGHT"
@@ -386,6 +423,8 @@ class SnakeGame:
         the game window to create a clear, prominent game over screen
         that provides the player with their final score and next steps.
         """
+        if self.test_mode or not self.game_win:
+            return
 
         # Calculate center position
         center_y = self.height // 2
@@ -416,6 +455,9 @@ class SnakeGame:
         non-blocking mode for gameplay. All text is centered within
         the game window for an attractive welcome presentation.
         """
+        if self.test_mode or not self.game_win:
+            return
+
         welcome_text = "SNAKE GAME"
         start_text = "Press any key to start!"
 
@@ -453,6 +495,8 @@ class SnakeGame:
         The clearing and redrawing approach prevents visual artifacts
         and ensures clean animation.
         """
+        if self.test_mode or not self.game_win:
+            return
 
         # Clear the game area (not the border)
         for y in range(1, self.height - 1):
@@ -490,6 +534,14 @@ class SnakeGame:
            - Updates display
            - Controls game speed with delay
         5. Handles cleanup on exit
+
+        Exception handling:
+        - Catches KeyboardInterrupt (Ctrl+C) for graceful exit
+        - Ensures proper curses cleanup in finally block
+
+        The method uses threading for input handling to maintain
+        responsive controls while managing game timing and display
+        updates in the main thread.
         """
         try:
             # Show welcome screen
@@ -525,17 +577,22 @@ class SnakeGame:
 
     def cleanup(self):
         """
-        Update the entire game display with current game state.
-        Performs a complete refresh of all visual elements:
-        1. Clears the game area (preserving border)
-        2. Draws game border
-        3. Draws snake at current position
-        4. Draws food at current position
-        5. Shows game over screen if applicable
-        6. Updates score display
-        7. Updates instruction display
-        8. Refreshes both main screen and game window
+        Clean up curses environment and restore terminal state.
+
+        Properly shuts down the curses interface by:
+        - Disabling cbreak mode (restoring line buffering)
+        - Re-enabling echo for normal terminal input
+        - Restoring cursor visibility
+        - Ending the curses session
+
+        This method is essential for leaving the terminal in a
+        usable state after the game exits. Called automatically
+        in the finally block of the run() method to ensure
+        cleanup occurs even if the game exits unexpectedly.
         """
+        if self.test_mode or not self.stdscr:
+            return
+
         curses.nocbreak()
         curses.echo()
         curses.curs_set(1)
