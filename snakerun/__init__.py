@@ -7,10 +7,36 @@ import shutil
 
 
 class SnakeGame:
+    """
+    A terminal-based Snake game implemented using the curses library.
+
+    Attributes:
+        width (int): Width of the game area.
+        height (int): Height of the game area.
+        snake (deque): Deque representing the snake's body coordinates.
+        direction (str): Current moving direction of the snake.
+        next_direction (str): Next direction input from the user.
+        food (tuple or None): Coordinates of the current food item.
+        score (int): Player's current score.
+        game_over (bool): Flag indicating if the game has ended.
+        running (bool): Flag indicating if the game loop is running.
+        delay (int): Delay between snake moves in milliseconds.
+        stdscr (curses.window): The main curses screen.
+        game_win (curses.window): Window displaying the game area.
+    """
+
     def __init__(
         self,
     ):
+        """
+        Initialize the Snake game with default settings.
+        Sets up game dimensions, initial snake state, score, and
+        initializes the curses display. Also validates terminal size.
+        """
+        # Re-check dimensions (in case terminal was resized)
+
         # Game dimensions
+
         self.width = 40
         self.height = 20
 
@@ -32,8 +58,19 @@ class SnakeGame:
         self.init_curses()
 
     def window_terminal_validity(self):
-        # Re-check dimensions (in case terminal was resized)
+        """
+        Check if the current terminal size is sufficient for the game.
 
+        Validates that the terminal dimensions are large enough to display
+        the game area plus borders and UI elements. The minimum required
+        size accounts for the game area plus 4 additional characters for
+        borders and spacing.
+
+        Raises:
+            Exception: If the terminal is smaller than required dimensions
+                      (height+4 x width+4). Includes current and required
+                      dimensions in the error message.
+        """
         size = shutil.get_terminal_size(fallback=(80, 24))
         terminal_width = size.columns
         terminal_height = size.lines
@@ -47,7 +84,15 @@ class SnakeGame:
             )
 
     def init_curses(self):
-        """Initialize the curses display"""
+        """
+        Initialize the curses display and configure game window.
+
+        Sets up:
+            - Main screen
+            - Input and display options
+            - Color pairs for snake, food, border, and texts
+            - Non-blocking input for real-time gameplay
+        """
         self.stdscr = curses.initscr()
         curses.noecho()
         curses.cbreak()
@@ -73,13 +118,28 @@ class SnakeGame:
         screen_height, screen_width = self.stdscr.getmaxyx()
 
     def draw_border(self):
-        """Draw the dark green border around the game area"""
+        """
+        Draw the dark green border around the game area.
+
+        Creates a visual boundary for the playing field using curses
+        border characters. The border is drawn in green with bold
+        formatting to make it clearly visible and distinguish the
+        game area from the surrounding terminal space.
+        """
         self.game_win.attron(curses.color_pair(3) | curses.A_BOLD)
         self.game_win.border()
         self.game_win.attroff(curses.color_pair(3) | curses.A_BOLD)
 
     def init_snake(self):
-        """Initialize the snake at the center of the screen"""
+        """
+        Initialize the snake at the center of the screen.
+
+        Creates a new snake with 3 segments positioned horizontally
+        in the center of the game area. The snake starts facing right
+        with the head at the center and two body segments trailing
+        to the left. This provides a consistent starting state for
+        each new game.
+        """
         center_x = self.width // 2
         center_y = self.height // 2
 
@@ -87,7 +147,16 @@ class SnakeGame:
         self.snake = deque([(center_x, center_y), (center_x - 1, center_y), (center_x - 2, center_y)])
 
     def spawn_food(self):
-        """Spawn food at a random empty location"""
+        """
+        Spawn food at a random empty location within the game area.
+
+        Continuously generates random coordinates within the playable
+        area (excluding border positions) until finding a location
+        that doesn't overlap with any part of the snake's body.
+        This ensures food is always accessible and visible to the player.
+
+        The food coordinates are stored in self.food as a tuple (x, y).
+        """
         while True:
             x = random.randint(1, self.width - 2)
             y = random.randint(1, self.height - 2)
@@ -96,19 +165,44 @@ class SnakeGame:
                 break
 
     def draw_snake(self):
-        """Draw the green snake"""
+        """
+        Draw the green snake on the game area.
+
+        Renders each segment of the snake using the block character "█"
+        in green color with bold formatting. Iterates through all
+        segments in the snake deque and draws them at their respective
+        coordinates within the game window.
+        """
         for segment in self.snake:
             x, y = segment
             self.game_win.addch(y, x, "█", curses.color_pair(1) | curses.A_BOLD)
 
     def draw_food(self):
-        """Draw the red food"""
+        """
+        Draw the red food item on the game area.
+
+        Renders the food as a circular bullet character "●" in red
+        color with bold formatting. Only draws the food if it exists
+        (self.food is not None), positioning it at the stored
+        coordinates within the game window.
+        """
         if self.food:
             x, y = self.food
             self.game_win.addch(y, x, "●", curses.color_pair(2) | curses.A_BOLD)
 
     def draw_score(self):
-        """Draw the score at the bottom right outside the border"""
+        """
+        Draw the current score at the bottom right outside the game border.
+
+        Displays the score in the format "Score: X" positioned below
+        and to the right of the game area. The text is right-aligned
+        and rendered in white with bold formatting for visibility.
+
+        Position calculation accounts for:
+        - Game window position and dimensions
+        - Text length for proper alignment
+        - Border spacing for clean layout
+        """
         score_text = f"Score: {self.score}"
         # Position: bottom right corner outside the game border
         score_y = 2 + self.height + 2  # Below the game window
@@ -117,7 +211,19 @@ class SnakeGame:
         self.stdscr.addstr(score_y, score_x, score_text, curses.color_pair(4) | curses.A_BOLD)
 
     def draw_instructions(self):
-        """Draw game instructions"""
+        """
+        Draw game control instructions to the right of the game area.
+
+        Displays a list of available controls and commands:
+        - Movement controls (WASD or Arrow Keys)
+        - Quit command ('q')
+        - Restart command ('r')
+
+        Instructions are positioned to the right of the game border
+        in white text, providing players with easily accessible
+        reference for game controls.
+        """
+
         instructions = ["Use WASD or Arrow Keys to move", "Press 'q' to quit", "Press 'r' to restart"]
 
         start_y = 2
@@ -125,7 +231,22 @@ class SnakeGame:
             self.stdscr.addstr(start_y + i, 2 + self.width + 5, instruction, curses.color_pair(4))
 
     def move_snake(self):
-        """Move the snake in the current direction"""
+        """
+        Move the snake in the current direction and handle game logic.
+
+        Performs the core game movement logic:
+        1. Calculates new head position based on current direction
+        2. Checks for collisions with walls or snake body
+        3. Adds new head to snake
+        4. Handles food consumption (grows snake, increases score, spawns new food)
+        5. Removes tail segment if no food was eaten
+        6. Increases game speed slightly when food is consumed
+
+        Sets game_over flag to True if collision is detected.
+        Updates score and respawns food when food is consumed.
+        Implements speed increase mechanism for progressive difficulty.
+        """
+
         head_x, head_y = self.snake[0]
 
         # Calculate new head position
@@ -158,7 +279,19 @@ class SnakeGame:
             self.snake.pop()
 
     def check_collision(self, position):
-        """Check if the snake collides with walls or itself"""
+        """
+        Check if a given position results in a collision.
+
+        Args:
+            position (tuple): The (x, y) coordinates to check for collision.
+
+        Returns:
+            bool: True if collision detected, False otherwise.
+
+        Collision detection includes:
+        - Wall collision: position is at or beyond game area boundaries
+        - Self collision: position overlaps with any part of snake body
+        """
         x, y = position
 
         # Check wall collision
@@ -172,7 +305,26 @@ class SnakeGame:
         return False
 
     def handle_input(self):
-        """Handle keyboard input in a separate thread"""
+        """
+        Handle keyboard input in a separate thread for real-time control.
+
+        Runs continuously while the game is active, processing keyboard
+        input without blocking the main game loop. Supports both WASD
+        and arrow key controls with collision prevention (can't reverse
+        directly into snake body).
+
+        Supported controls:
+        - W/Up Arrow: Move up (if not currently moving down)
+        - S/Down Arrow: Move down (if not currently moving up)
+        - A/Left Arrow: Move left (if not currently moving right)
+        - D/Right Arrow: Move right (if not currently moving left)
+        - Q: Quit game
+        - R: Restart game (only when game over)
+
+        Input is case-insensitive. Includes small delay to prevent
+        excessive CPU usage while maintaining responsiveness.
+        """
+
         while self.running:
             key = self.game_win.getch()
 
@@ -199,7 +351,19 @@ class SnakeGame:
             time.sleep(0.01)  # Small delay to prevent excessive CPU usage
 
     def restart_game(self):
-        """Restart the game"""
+        """
+        Reset the game to its initial state for a fresh start.
+
+        Clears all game state and reinitializes core components:
+        - Clears snake body
+        - Resets score to 0
+        - Sets direction back to RIGHT
+        - Clears game over flag
+        - Resets game speed to initial value
+        - Reinitializes snake position
+        - Spawns new food
+        """
+
         self.snake.clear()
         self.score = 0
         self.direction = "RIGHT"
@@ -210,7 +374,19 @@ class SnakeGame:
         self.spawn_food()
 
     def draw_game_over(self):
-        """Draw game over screen"""
+        """
+        Draw the game over screen with final score and restart options.
+
+        Displays centered text on the game area including:
+        - "GAME OVER!" message in yellow with bold formatting
+        - Final score display in white
+        - Restart/quit instructions in white
+
+        All text is centered both horizontally and vertically within
+        the game window to create a clear, prominent game over screen
+        that provides the player with their final score and next steps.
+        """
+
         # Calculate center position
         center_y = self.height // 2
         center_x = self.width // 2
@@ -227,7 +403,19 @@ class SnakeGame:
         self.game_win.addstr(center_y + 1, center_x - len(restart_text) // 2, restart_text, curses.color_pair(4))
 
     def draw_welcome(self):
-        """Draw welcome screen"""
+        """
+        Draw the welcome screen and wait for player input to start.
+
+        Displays the initial game screen with:
+        - "SNAKE GAME" title in green with bold formatting
+        - "Press any key to start!" instruction in white
+        - Game border for visual context
+
+        The method temporarily disables non-blocking input to wait
+        for a key press before starting the game, then re-enables
+        non-blocking mode for gameplay. All text is centered within
+        the game window for an attractive welcome presentation.
+        """
         welcome_text = "SNAKE GAME"
         start_text = "Press any key to start!"
 
@@ -247,7 +435,25 @@ class SnakeGame:
         self.game_win.nodelay(True)
 
     def update_display(self):
-        """Update the game display"""
+        """
+        Update the entire game display with current game state.
+
+        Performs a complete refresh of all visual elements:
+        1. Clears the game area (preserving border)
+        2. Draws game border
+        3. Draws snake at current position
+        4. Draws food at current position
+        5. Shows game over screen if applicable
+        6. Updates score display
+        7. Updates instruction display
+        8. Refreshes both main screen and game window
+
+        This method is called every game loop iteration to ensure
+        the display accurately reflects the current game state.
+        The clearing and redrawing approach prevents visual artifacts
+        and ensures clean animation.
+        """
+
         # Clear the game area (not the border)
         for y in range(1, self.height - 1):
             for x in range(1, self.width - 1):
@@ -271,7 +477,20 @@ class SnakeGame:
         self.game_win.refresh()
 
     def run(self):
-        # Validate terminal size
+        """
+        Main game execution method that runs the complete game loop.
+
+        Orchestrates the entire game flow:
+        1. Shows welcome screen and waits for start
+        2. Initializes snake and food
+        3. Starts input handling thread for real-time controls
+        4. Runs main game loop until quit/exit:
+           - Updates snake direction from input
+           - Moves snake (if game not over)
+           - Updates display
+           - Controls game speed with delay
+        5. Handles cleanup on exit
+        """
         try:
             # Show welcome screen
             self.draw_welcome()
@@ -305,7 +524,18 @@ class SnakeGame:
             self.cleanup()
 
     def cleanup(self):
-        """Clean up curses"""
+        """
+        Update the entire game display with current game state.
+        Performs a complete refresh of all visual elements:
+        1. Clears the game area (preserving border)
+        2. Draws game border
+        3. Draws snake at current position
+        4. Draws food at current position
+        5. Shows game over screen if applicable
+        6. Updates score display
+        7. Updates instruction display
+        8. Refreshes both main screen and game window
+        """
         curses.nocbreak()
         curses.echo()
         curses.curs_set(1)
