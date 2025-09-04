@@ -33,3 +33,4 @@ Table of Contents
    installation
    usage
    testing
+   api
