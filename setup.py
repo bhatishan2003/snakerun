@@ -55,6 +55,6 @@ setup(
             "snakerun=snakerun.cli:main",
         ],
     },
-    keywords="snake game python cli",
+    keywords="snake game python-cli",
     include_package_data=True,
 )
