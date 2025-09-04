@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>snakerun &#8212; Snakerun 0.0.4 documentation</title>
+    <link rel="stylesheet" href="../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../_static/insipid.css?v=b2d00be7" />
+
+    <script src="../_static/documentation_options.js?v=94eb6667"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer src="../_static/insipid.js"></script>
+    <script defer src="../_static/insipid-sidebar.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head><body>
+    <script type="text/javascript">
+        document.body.classList.add('js');
+    </script>
+    <input type="checkbox" id="sidebar-checkbox" style="display: none;">
+    <label id="overlay" for="sidebar-checkbox"></label>
+    <div class="sidebar-resize-handle"></div>
+    <script type="text/javascript">
+        try {
+            let sidebar = localStorage.getItem('sphinx-sidebar');
+            const sidebar_width = localStorage.getItem('sphinx-sidebar-width');
+            if (sidebar_width) {
+                document.documentElement.style.setProperty('--sidebar-width', sidebar_width);
+            }
+            // show sidebar on wide screen
+            if (!sidebar && window.matchMedia('(min-width: 100rem)').matches) {
+                sidebar = 'visible';
+                // NB: We don't store the value in localStorage!
+            }
+            if (sidebar === 'visible') {
+                document.getElementById('sidebar-checkbox').checked = true;
+            }
+        } catch(e) {
+            console.info(e);
+        }
+    </script>
+    <header id="topbar-placeholder">
+      <div id="topbar">
+        <div id="titlebar">
+          <div class="buttons">
+            <label for="sidebar-checkbox" id="sidebar-button" role="button" tabindex="0" aria-controls="sphinxsidebar" accesskey="M">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+            </label>
+            <button id="search-button" type="button" title="Search" aria-label="Search" aria-expanded="false" aria-controls="search-form" accesskey="S">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+            </button>
+          </div>
+          <div class="title">
+            <a class="parent" href="index.html" accesskey="U">Module code</a>
+            <a class="top" href="#">snakerun</a>
+          </div>
+          <div class="buttons">
+            <button id="fullscreen-button" type="button" aria-hidden="true">
+              <span class="enable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M212.686 315.314L120 408l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C10.697 480 0 469.255 0 456V344c0-21.382 25.803-32.09 40.922-16.971L72 360l92.686-92.686c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.249 6.248 6.249 16.378 0 22.627zm22.628-118.628L328 104l-32.922-31.029C279.958 57.851 290.666 32 312.048 32h112C437.303 32 448 42.745 448 56v112c0 21.382-25.803 32.09-40.922 16.971L376 152l-92.686 92.686c-6.248 6.248-16.379 6.248-22.627 0l-25.373-25.373c-6.249-6.248-6.249-16.378 0-22.627z"/></svg>
+              </span>
+              <span class="disable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M4.686 427.314L104 328l-32.922-31.029C55.958 281.851 66.666 256 88.048 256h112C213.303 256 224 266.745 224 280v112c0 21.382-25.803 32.09-40.922 16.971L152 376l-99.314 99.314c-6.248 6.248-16.379 6.248-22.627 0L4.686 449.941c-6.248-6.248-6.248-16.379 0-22.627zM443.314 84.686L344 184l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C234.697 256 224 245.255 224 232V120c0-21.382 25.803-32.09 40.922-16.971L296 136l99.314-99.314c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.248 6.248 6.248 16.379 0 22.627z"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div id="searchbox" role="search">
+          <form id="search-form" class="search" style="display: none" action="../search.html" method="get">
+            <input type="search" name="q" placeholder="Search ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <button>Go</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <nav>
+    </nav>
+
+    <nav class="relbar">
+    </nav>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<h1>Source code for snakerun</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">curses</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+
+<div class="viewcode-block" id="SnakeGame">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SnakeGame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A terminal-based Snake game implemented using the curses library.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        width (int): Width of the game area.</span>
+<span class="sd">        height (int): Height of the game area.</span>
+<span class="sd">        snake (deque): Deque representing the snake&#39;s body coordinates.</span>
+<span class="sd">        direction (str): Current moving direction of the snake.</span>
+<span class="sd">        next_direction (str): Next direction input from the user.</span>
+<span class="sd">        food (tuple or None): Coordinates of the current food item.</span>
+<span class="sd">        score (int): Player&#39;s current score.</span>
+<span class="sd">        game_over (bool): Flag indicating if the game has ended.</span>
+<span class="sd">        running (bool): Flag indicating if the game loop is running.</span>
+<span class="sd">        delay (int): Delay between snake moves in milliseconds.</span>
+<span class="sd">        stdscr (curses.window): The main curses screen.</span>
+<span class="sd">        game_win (curses.window): Window displaying the game area.</span>
+<span class="sd">        test_mode (bool): Whether running in test mode (no curses initialization).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the Snake game with default settings.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_mode (bool): If True, skip curses initialization for testing.</span>
+
+<span class="sd">        Sets up game dimensions, initial snake state, score, and</span>
+<span class="sd">        initializes the curses display (unless in test mode). Also validates terminal size.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Game dimensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">40</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">20</span>
+
+        <span class="c1"># Game state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snake</span> <span class="o">=</span> <span class="n">deque</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;RIGHT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;RIGHT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">food</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="o">=</span> <span class="n">test_mode</span>
+
+        <span class="c1"># Game speed (delay between moves in milliseconds)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mi">150</span>
+
+        <span class="c1"># Initialize curses and UI elements only if not in test mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">test_mode</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_terminal_validity</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_curses</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SnakeGame.window_terminal_validity">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.window_terminal_validity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">window_terminal_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the current terminal size is sufficient for the game.</span>
+
+<span class="sd">        Validates that the terminal dimensions are large enough to display</span>
+<span class="sd">        the game area plus borders and UI elements. The minimum required</span>
+<span class="sd">        size accounts for the game area plus 4 additional characters for</span>
+<span class="sd">        borders and spacing.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If the terminal is smaller than required dimensions</span>
+<span class="sd">                      (height+4 x width+4). Includes current and required</span>
+<span class="sd">                      dimensions in the error message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">get_terminal_size</span><span class="p">(</span><span class="n">fallback</span><span class="o">=</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">24</span><span class="p">))</span>
+        <span class="n">terminal_width</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">terminal_height</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">lines</span>
+
+        <span class="k">if</span> <span class="n">terminal_height</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">terminal_width</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Terminal too small! Minimum required: &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s2">, &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Current: </span><span class="si">{</span><span class="n">terminal_height</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">terminal_width</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="s2">&quot;Please expand terminal size&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.init_curses">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.init_curses">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_curses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the curses display and configure game window.</span>
+
+<span class="sd">        Sets up:</span>
+<span class="sd">            - Main screen with proper input/output settings</span>
+<span class="sd">            - Input and display options (no echo, non-blocking input)</span>
+<span class="sd">            - Color pairs for snake, food, border, and text elements</span>
+<span class="sd">            - Game window with borders and keypad support</span>
+<span class="sd">            - Non-blocking input for real-time gameplay</span>
+
+<span class="sd">        Color pairs defined:</span>
+<span class="sd">            1: Green snake on default background</span>
+<span class="sd">            2: Red food on default background</span>
+<span class="sd">            3: Green border on default background</span>
+<span class="sd">            4: White text on default background</span>
+<span class="sd">            5: Yellow game over text on default background</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span> <span class="o">=</span> <span class="n">curses</span><span class="o">.</span><span class="n">initscr</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">noecho</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">cbreak</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">curs_set</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Enable colors</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">start_color</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">use_default_colors</span><span class="p">()</span>
+
+        <span class="c1"># Define color pairs</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">init_pair</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">COLOR_GREEN</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Snake (green)</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">init_pair</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">COLOR_RED</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Food (red)</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">init_pair</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">COLOR_GREEN</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Border (dark green)</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">init_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">COLOR_WHITE</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Score text (white)</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">init_pair</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">COLOR_YELLOW</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Game over text (yellow)</span>
+
+        <span class="c1"># Create game window with border</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span> <span class="o">=</span> <span class="n">curses</span><span class="o">.</span><span class="n">newwin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">keypad</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">nodelay</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Get screen dimensions for score placement</span>
+        <span class="n">screen_height</span><span class="p">,</span> <span class="n">screen_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="o">.</span><span class="n">getmaxyx</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_border">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_border">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_border</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the dark green border around the game area.</span>
+
+<span class="sd">        Creates a visual boundary for the playing field using curses</span>
+<span class="sd">        border characters. The border is drawn in green with bold</span>
+<span class="sd">        formatting to make it clearly visible and distinguish the</span>
+<span class="sd">        game area from the surrounding terminal space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">attron</span><span class="p">(</span><span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">border</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">attroff</span><span class="p">(</span><span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.init_snake">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.init_snake">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">init_snake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the snake at the center of the screen.</span>
+
+<span class="sd">        Creates a new snake with 3 segments positioned horizontally</span>
+<span class="sd">        in the center of the game area. The snake starts facing right</span>
+<span class="sd">        with the head at the center and two body segments trailing</span>
+<span class="sd">        to the left. This provides a consistent starting state for</span>
+<span class="sd">        each new game.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="c1"># Snake starts with 3 segments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snake</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">),</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center_y</span><span class="p">),</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">center_y</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.spawn_food">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.spawn_food">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spawn_food</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Spawn food at a random empty location within the game area.</span>
+
+<span class="sd">        Continuously generates random coordinates within the playable</span>
+<span class="sd">        area (excluding border positions) until finding a location</span>
+<span class="sd">        that doesn&#39;t overlap with any part of the snake&#39;s body.</span>
+<span class="sd">        This ensures food is always accessible and visible to the player.</span>
+
+<span class="sd">        The food coordinates are stored in self.food as a tuple (x, y).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">food</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="k">break</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_snake">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_snake">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_snake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the green snake on the game area.</span>
+
+<span class="sd">        Renders each segment of the snake using the block character &quot;█&quot;</span>
+<span class="sd">        in green color with bold formatting. Iterates through all</span>
+<span class="sd">        segments in the snake deque and draws them at their respective</span>
+<span class="sd">        coordinates within the game window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">segment</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addch</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;█&quot;</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_food">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_food">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_food</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the red food item on the game area.</span>
+
+<span class="sd">        Renders the food as a circular bullet character &quot;●&quot; in red</span>
+<span class="sd">        color with bold formatting. Only draws the food if it exists</span>
+<span class="sd">        (self.food is not None), positioning it at the stored</span>
+<span class="sd">        coordinates within the game window.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">food</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">food</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addch</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;●&quot;</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_score">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_score">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the current score at the bottom right outside the game border.</span>
+
+<span class="sd">        Displays the score in the format &quot;Score: X&quot; positioned below</span>
+<span class="sd">        and to the right of the game area. The text is right-aligned</span>
+<span class="sd">        and rendered in white with bold formatting for visibility.</span>
+
+<span class="sd">        Position calculation accounts for:</span>
+<span class="sd">        - Game window position and dimensions</span>
+<span class="sd">        - Text length for proper alignment</span>
+<span class="sd">        - Border spacing for clean layout</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">score_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="c1"># Position: bottom right corner outside the game border</span>
+        <span class="n">score_y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="mi">2</span>  <span class="c1"># Below the game window</span>
+        <span class="n">score_x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">score_text</span><span class="p">)</span>  <span class="c1"># Right aligned</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span><span class="n">score_y</span><span class="p">,</span> <span class="n">score_x</span><span class="p">,</span> <span class="n">score_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_instructions">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_instructions">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw game control instructions to the right of the game area.</span>
+
+<span class="sd">        Displays a list of available controls and commands:</span>
+<span class="sd">        - Movement controls (WASD or Arrow Keys)</span>
+<span class="sd">        - Quit command (&#39;q&#39;)</span>
+<span class="sd">        - Restart command (&#39;r&#39;)</span>
+
+<span class="sd">        Instructions are positioned to the right of the game border</span>
+<span class="sd">        in white text, providing players with easily accessible</span>
+<span class="sd">        reference for game controls.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">instructions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Use WASD or Arrow Keys to move&quot;</span><span class="p">,</span> <span class="s2">&quot;Press &#39;q&#39; to quit&quot;</span><span class="p">,</span> <span class="s2">&quot;Press &#39;r&#39; to restart&quot;</span><span class="p">]</span>
+
+        <span class="n">start_y</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instructions</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span><span class="n">start_y</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="n">instruction</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.move_snake">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.move_snake">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_snake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Move the snake in the current direction and handle game logic.</span>
+
+<span class="sd">        Performs the core game movement logic:</span>
+<span class="sd">        1. Calculates new head position based on current direction</span>
+<span class="sd">        2. Checks for collisions with walls or snake body</span>
+<span class="sd">        3. Adds new head to snake</span>
+<span class="sd">        4. Handles food consumption (grows snake, increases score, spawns new food)</span>
+<span class="sd">        5. Removes tail segment if no food was eaten</span>
+<span class="sd">        6. Increases game speed slightly when food is consumed</span>
+
+<span class="sd">        Sets game_over flag to True if collision is detected.</span>
+<span class="sd">        Updates score and respawns food when food is consumed.</span>
+<span class="sd">        Implements speed increase mechanism for progressive difficulty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">head_x</span><span class="p">,</span> <span class="n">head_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Calculate new head position</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;UP&quot;</span><span class="p">:</span>
+            <span class="n">new_head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head_x</span><span class="p">,</span> <span class="n">head_y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;DOWN&quot;</span><span class="p">:</span>
+            <span class="n">new_head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head_x</span><span class="p">,</span> <span class="n">head_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">:</span>
+            <span class="n">new_head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head_x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head_y</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;RIGHT&quot;</span><span class="p">:</span>
+            <span class="n">new_head</span> <span class="o">=</span> <span class="p">(</span><span class="n">head_x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">head_y</span><span class="p">)</span>
+
+        <span class="c1"># Check for collisions</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_collision</span><span class="p">(</span><span class="n">new_head</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Add new head</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">new_head</span><span class="p">)</span>
+
+        <span class="c1"># Check if food is eaten</span>
+        <span class="k">if</span> <span class="n">new_head</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">food</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spawn_food</span><span class="p">()</span>
+            <span class="c1"># Increase speed slightly</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Remove tail if no food eaten</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.check_collision">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.check_collision">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_collision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if a given position results in a collision.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            position (tuple): The (x, y) coordinates to check for collision.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if collision detected, False otherwise.</span>
+
+<span class="sd">        Collision detection includes:</span>
+<span class="sd">        - Wall collision: position is at or beyond game area boundaries</span>
+<span class="sd">        - Self collision: position overlaps with any part of snake body</span>
+
+<span class="sd">        The method checks boundaries against the playable area (excluding</span>
+<span class="sd">        the border positions) and iterates through the snake deque to</span>
+<span class="sd">        detect self-intersection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">position</span>
+
+        <span class="c1"># Check wall collision</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># Check self collision</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.handle_input">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.handle_input">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_input</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Handle keyboard input in a separate thread for real-time control.</span>
+
+<span class="sd">        Runs continuously while the game is active, processing keyboard</span>
+<span class="sd">        input without blocking the main game loop. Supports both WASD</span>
+<span class="sd">        and arrow key controls with collision prevention (can&#39;t reverse</span>
+<span class="sd">        directly into snake body).</span>
+
+<span class="sd">        Supported controls:</span>
+<span class="sd">        - W/Up Arrow: Move up (if not currently moving down)</span>
+<span class="sd">        - S/Down Arrow: Move down (if not currently moving up)</span>
+<span class="sd">        - A/Left Arrow: Move left (if not currently moving right)</span>
+<span class="sd">        - D/Right Arrow: Move right (if not currently moving left)</span>
+<span class="sd">        - Q: Quit game</span>
+<span class="sd">        - R: Restart game (only when game over)</span>
+
+<span class="sd">        Input is case-insensitive. Includes small delay to prevent</span>
+<span class="sd">        excessive CPU usage while maintaining responsiveness.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">getch</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># Key was pressed</span>
+                <span class="c1"># Convert to uppercase for consistency</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;W&quot;</span><span class="p">),</span> <span class="n">curses</span><span class="o">.</span><span class="n">KEY_UP</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">!=</span> <span class="s2">&quot;DOWN&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;UP&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">),</span> <span class="n">curses</span><span class="o">.</span><span class="n">KEY_DOWN</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">!=</span> <span class="s2">&quot;UP&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;DOWN&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="n">curses</span><span class="o">.</span><span class="n">KEY_LEFT</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">!=</span> <span class="s2">&quot;RIGHT&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;LEFT&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">),</span> <span class="n">curses</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">!=</span> <span class="s2">&quot;LEFT&quot;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;RIGHT&quot;</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;Q&quot;</span><span class="p">)]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">),</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">)]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">restart_game</span><span class="p">()</span>
+
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># Small delay to prevent excessive CPU usage</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.restart_game">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.restart_game">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">restart_game</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the game to its initial state for a fresh start.</span>
+
+<span class="sd">        Clears all game state and reinitializes core components:</span>
+<span class="sd">        - Clears snake body</span>
+<span class="sd">        - Resets score to 0</span>
+<span class="sd">        - Sets direction back to RIGHT</span>
+<span class="sd">        - Clears game over flag</span>
+<span class="sd">        - Resets game speed to initial value</span>
+<span class="sd">        - Reinitializes snake position</span>
+<span class="sd">        - Spawns new food</span>
+
+<span class="sd">        This method is called when the player presses &#39;R&#39; during</span>
+<span class="sd">        the game over screen, allowing for immediate replay without</span>
+<span class="sd">        restarting the entire program.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">snake</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="s2">&quot;RIGHT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span> <span class="o">=</span> <span class="s2">&quot;RIGHT&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">=</span> <span class="mi">150</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_snake</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spawn_food</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_game_over">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_game_over">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_game_over</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the game over screen with final score and restart options.</span>
+
+<span class="sd">        Displays centered text on the game area including:</span>
+<span class="sd">        - &quot;GAME OVER!&quot; message in yellow with bold formatting</span>
+<span class="sd">        - Final score display in white</span>
+<span class="sd">        - Restart/quit instructions in white</span>
+
+<span class="sd">        All text is centered both horizontally and vertically within</span>
+<span class="sd">        the game window to create a clear, prominent game over screen</span>
+<span class="sd">        that provides the player with their final score and next steps.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Calculate center position</span>
+        <span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="n">game_over_text</span> <span class="o">=</span> <span class="s2">&quot;GAME OVER!&quot;</span>
+        <span class="n">restart_text</span> <span class="o">=</span> <span class="s2">&quot;Press &#39;r&#39; to restart or &#39;q&#39; to quit&quot;</span>
+        <span class="n">final_score_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Final Score: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="c1"># Draw game over messages</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span>
+            <span class="n">center_y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center_x</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">game_over_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">game_over_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span><span class="n">center_y</span><span class="p">,</span> <span class="n">center_x</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_score_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">final_score_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span><span class="n">center_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center_x</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">restart_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">restart_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.draw_welcome">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.draw_welcome">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw_welcome</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw the welcome screen and wait for player input to start.</span>
+
+<span class="sd">        Displays the initial game screen with:</span>
+<span class="sd">        - &quot;SNAKE GAME&quot; title in green with bold formatting</span>
+<span class="sd">        - &quot;Press any key to start!&quot; instruction in white</span>
+<span class="sd">        - Game border for visual context</span>
+
+<span class="sd">        The method temporarily disables non-blocking input to wait</span>
+<span class="sd">        for a key press before starting the game, then re-enables</span>
+<span class="sd">        non-blocking mode for gameplay. All text is centered within</span>
+<span class="sd">        the game window for an attractive welcome presentation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">welcome_text</span> <span class="o">=</span> <span class="s2">&quot;SNAKE GAME&quot;</span>
+        <span class="n">start_text</span> <span class="o">=</span> <span class="s2">&quot;Press any key to start!&quot;</span>
+
+        <span class="n">center_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">center_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_border</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span>
+            <span class="n">center_y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center_x</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">welcome_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">welcome_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="n">curses</span><span class="o">.</span><span class="n">A_BOLD</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addstr</span><span class="p">(</span><span class="n">center_y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">center_x</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">start_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">start_text</span><span class="p">,</span> <span class="n">curses</span><span class="o">.</span><span class="n">color_pair</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+        <span class="c1"># Wait for key press</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">nodelay</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">getch</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">nodelay</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.update_display">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.update_display">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the entire game display with current game state.</span>
+
+<span class="sd">        Performs a complete refresh of all visual elements:</span>
+<span class="sd">        1. Clears the game area (preserving border)</span>
+<span class="sd">        2. Draws game border</span>
+<span class="sd">        3. Draws snake at current position</span>
+<span class="sd">        4. Draws food at current position</span>
+<span class="sd">        5. Shows game over screen if applicable</span>
+<span class="sd">        6. Updates score display</span>
+<span class="sd">        7. Updates instruction display</span>
+<span class="sd">        8. Refreshes both main screen and game window</span>
+
+<span class="sd">        This method is called every game loop iteration to ensure</span>
+<span class="sd">        the display accurately reflects the current game state.</span>
+<span class="sd">        The clearing and redrawing approach prevents visual artifacts</span>
+<span class="sd">        and ensures clean animation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Clear the game area (not the border)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">addch</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+        <span class="c1"># Draw game elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_border</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_snake</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_food</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">draw_game_over</span><span class="p">()</span>
+
+        <span class="c1"># Update score and instructions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_score</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_instructions</span><span class="p">()</span>
+
+        <span class="c1"># Refresh windows</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">game_win</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.run">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.run">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Main game execution method that runs the complete game loop.</span>
+
+<span class="sd">        Orchestrates the entire game flow:</span>
+
+<span class="sd">        1. Shows welcome screen and waits for start</span>
+<span class="sd">        2. Initializes snake and food</span>
+<span class="sd">        3. Starts input handling thread for real-time controls</span>
+<span class="sd">        4. Runs main game loop until quit/exit:</span>
+<span class="sd">            - Updates snake direction from input</span>
+<span class="sd">            - Moves snake (if game not over)</span>
+<span class="sd">            - Updates display</span>
+<span class="sd">            - Controls game speed with delay</span>
+<span class="sd">        5. Handles cleanup on exit</span>
+
+<span class="sd">        Exception Handling:</span>
+<span class="sd">            - Catches KeyboardInterrupt (Ctrl+C) for graceful exit.</span>
+<span class="sd">            - Ensures proper curses cleanup in finally block.</span>
+
+<span class="sd">        The method uses threading for input handling to maintain</span>
+<span class="sd">        responsive controls while managing game timing and display</span>
+<span class="sd">        updates in the main thread.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Show welcome screen</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">draw_welcome</span><span class="p">()</span>
+
+            <span class="c1"># Initialize game</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_snake</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">spawn_food</span><span class="p">()</span>
+
+            <span class="c1"># Start input handling thread</span>
+            <span class="n">input_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_input</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">input_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+            <span class="c1"># Main game loop</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">game_over</span><span class="p">:</span>
+                    <span class="c1"># Update direction</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_direction</span>
+
+                    <span class="c1"># Move snake</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">move_snake</span><span class="p">()</span>
+
+                <span class="c1"># Update display</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_display</span><span class="p">()</span>
+
+                <span class="c1"># Game speed control</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delay</span> <span class="o">/</span> <span class="mf">1000.0</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SnakeGame.cleanup">
+<a class="viewcode-back" href="../snakerun.html#snakerun.SnakeGame.cleanup">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clean up curses environment and restore terminal state.</span>
+
+<span class="sd">        Properly shuts down the curses interface by:</span>
+<span class="sd">        - Disabling cbreak mode (restoring line buffering)</span>
+<span class="sd">        - Re-enabling echo for normal terminal input</span>
+<span class="sd">        - Restoring cursor visibility</span>
+<span class="sd">        - Ending the curses session</span>
+
+<span class="sd">        This method is essential for leaving the terminal in a</span>
+<span class="sd">        usable state after the game exits. Called automatically</span>
+<span class="sd">        in the finally block of the run() method to ensure</span>
+<span class="sd">        cleanup occurs even if the game exits unexpectedly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_mode</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdscr</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">curses</span><span class="o">.</span><span class="n">nocbreak</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">echo</span><span class="p">()</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">curs_set</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">curses</span><span class="o">.</span><span class="n">endwin</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+
+          <div class="sidebar-resize-handle"></div>
+
+<h3><a href="../index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+</ul>
+
+<div><hr class="docutils"></div>
+<ul>
+  <li class="toctree-l1"><a class="reference internal" href="../genindex.html" accesskey="I">General Index</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Python Module Index</a></li>
+</ul>
+<div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <nav class="relbar">
+    </nav>
+
+    <footer role="contentinfo">
+      &#169; Copyright 2025, Ishan Bhat.
+      Created using <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+      <a class="reference external" href="https://insipid-sphinx-theme.readthedocs.io/">Insipid Theme</a>.
+    </footer>
+  </body>
+</html>

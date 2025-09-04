@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>snakerun package &#8212; Snakerun 0.0.4 documentation</title>
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="_static/insipid.css?v=b2d00be7" />
+
+    <script src="_static/documentation_options.js?v=94eb6667"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script defer src="_static/insipid.js"></script>
+    <script defer src="_static/insipid-sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="snakerun" href="modules.html" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head><body>
+    <script type="text/javascript">
+        document.body.classList.add('js');
+    </script>
+    <input type="checkbox" id="sidebar-checkbox" style="display: none;">
+    <label id="overlay" for="sidebar-checkbox"></label>
+    <div class="sidebar-resize-handle"></div>
+    <script type="text/javascript">
+        try {
+            let sidebar = localStorage.getItem('sphinx-sidebar');
+            const sidebar_width = localStorage.getItem('sphinx-sidebar-width');
+            if (sidebar_width) {
+                document.documentElement.style.setProperty('--sidebar-width', sidebar_width);
+            }
+            // show sidebar on wide screen
+            if (!sidebar && window.matchMedia('(min-width: 100rem)').matches) {
+                sidebar = 'visible';
+                // NB: We don't store the value in localStorage!
+            }
+            if (sidebar === 'visible') {
+                document.getElementById('sidebar-checkbox').checked = true;
+            }
+        } catch(e) {
+            console.info(e);
+        }
+    </script>
+    <header id="topbar-placeholder">
+      <div id="topbar">
+        <div id="titlebar">
+          <div class="buttons">
+            <label for="sidebar-checkbox" id="sidebar-button" role="button" tabindex="0" aria-controls="sphinxsidebar" accesskey="M">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+            </label>
+            <button id="search-button" type="button" title="Search" aria-label="Search" aria-expanded="false" aria-controls="search-form" accesskey="S">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+            </button>
+          </div>
+          <div class="title">
+            <a class="parent" href="modules.html" accesskey="U">snakerun</a>
+            <a class="top" href="#">snakerun package</a>
+          </div>
+          <div class="buttons">
+            <button id="fullscreen-button" type="button" aria-hidden="true">
+              <span class="enable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M212.686 315.314L120 408l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C10.697 480 0 469.255 0 456V344c0-21.382 25.803-32.09 40.922-16.971L72 360l92.686-92.686c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.249 6.248 6.249 16.378 0 22.627zm22.628-118.628L328 104l-32.922-31.029C279.958 57.851 290.666 32 312.048 32h112C437.303 32 448 42.745 448 56v112c0 21.382-25.803 32.09-40.922 16.971L376 152l-92.686 92.686c-6.248 6.248-16.379 6.248-22.627 0l-25.373-25.373c-6.249-6.248-6.249-16.378 0-22.627z"/></svg>
+              </span>
+              <span class="disable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M4.686 427.314L104 328l-32.922-31.029C55.958 281.851 66.666 256 88.048 256h112C213.303 256 224 266.745 224 280v112c0 21.382-25.803 32.09-40.922 16.971L152 376l-99.314 99.314c-6.248 6.248-16.379 6.248-22.627 0L4.686 449.941c-6.248-6.248-6.248-16.379 0-22.627zM443.314 84.686L344 184l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C234.697 256 224 245.255 224 232V120c0-21.382 25.803-32.09 40.922-16.971L296 136l99.314-99.314c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.248 6.248 6.248 16.379 0 22.627z"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div id="searchbox" role="search">
+          <form id="search-form" class="search" style="display: none" action="search.html" method="get">
+            <input type="search" name="q" placeholder="Search ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <button>Go</button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <nav>
+      <a href="modules.html" class="nav-icon previous" title="previous:&#13;snakerun" aria-label="Previous topic" accesskey="P" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>
+      </a>
+    </nav>
+
+    <nav class="relbar">
+      <a class="previous" href="modules.html" aria-label="Previous topic" >
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+        </div>
+        <div class="title">
+          <span class="text">
+            <span class="direction">previous</span>
+            snakerun
+          </span>
+        </div>
+      </a>
+    </nav>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<section id="snakerun-package">
+<h1>snakerun package<a class="headerlink" href="#snakerun-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-snakerun.cli">
+<span id="snakerun-cli-module"></span><h2>snakerun.cli module<a class="headerlink" href="#module-snakerun.cli" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="snakerun.cli.main">
+<span class="sig-prename descclassname"><span class="pre">snakerun.cli.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun/cli.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.cli.main" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-snakerun">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-snakerun" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snakerun.SnakeGame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">snakerun.</span></span><span class="sig-name descname"><span class="pre">SnakeGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A terminal-based Snake game implemented using the curses library.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.width">
+<span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#snakerun.SnakeGame.width" title="Link to this definition">¶</a></dt>
+<dd><p>Width of the game area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.height">
+<span class="sig-name descname"><span class="pre">height</span></span><a class="headerlink" href="#snakerun.SnakeGame.height" title="Link to this definition">¶</a></dt>
+<dd><p>Height of the game area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.snake">
+<span class="sig-name descname"><span class="pre">snake</span></span><a class="headerlink" href="#snakerun.SnakeGame.snake" title="Link to this definition">¶</a></dt>
+<dd><p>Deque representing the snake’s body coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>deque</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.direction">
+<span class="sig-name descname"><span class="pre">direction</span></span><a class="headerlink" href="#snakerun.SnakeGame.direction" title="Link to this definition">¶</a></dt>
+<dd><p>Current moving direction of the snake.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.next_direction">
+<span class="sig-name descname"><span class="pre">next_direction</span></span><a class="headerlink" href="#snakerun.SnakeGame.next_direction" title="Link to this definition">¶</a></dt>
+<dd><p>Next direction input from the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.food">
+<span class="sig-name descname"><span class="pre">food</span></span><a class="headerlink" href="#snakerun.SnakeGame.food" title="Link to this definition">¶</a></dt>
+<dd><p>Coordinates of the current food item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.score">
+<span class="sig-name descname"><span class="pre">score</span></span><a class="headerlink" href="#snakerun.SnakeGame.score" title="Link to this definition">¶</a></dt>
+<dd><p>Player’s current score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.game_over">
+<span class="sig-name descname"><span class="pre">game_over</span></span><a class="headerlink" href="#snakerun.SnakeGame.game_over" title="Link to this definition">¶</a></dt>
+<dd><p>Flag indicating if the game has ended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.running">
+<span class="sig-name descname"><span class="pre">running</span></span><a class="headerlink" href="#snakerun.SnakeGame.running" title="Link to this definition">¶</a></dt>
+<dd><p>Flag indicating if the game loop is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.delay">
+<span class="sig-name descname"><span class="pre">delay</span></span><a class="headerlink" href="#snakerun.SnakeGame.delay" title="Link to this definition">¶</a></dt>
+<dd><p>Delay between snake moves in milliseconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.stdscr">
+<span class="sig-name descname"><span class="pre">stdscr</span></span><a class="headerlink" href="#snakerun.SnakeGame.stdscr" title="Link to this definition">¶</a></dt>
+<dd><p>The main curses screen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>curses.window</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.game_win">
+<span class="sig-name descname"><span class="pre">game_win</span></span><a class="headerlink" href="#snakerun.SnakeGame.game_win" title="Link to this definition">¶</a></dt>
+<dd><p>Window displaying the game area.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>curses.window</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.test_mode">
+<span class="sig-name descname"><span class="pre">test_mode</span></span><a class="headerlink" href="#snakerun.SnakeGame.test_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Whether running in test mode (no curses initialization).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.check_collision">
+<span class="sig-name descname"><span class="pre">check_collision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.check_collision"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.check_collision" title="Link to this definition">¶</a></dt>
+<dd><p>Check if a given position results in a collision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>position</strong> (<em>tuple</em>) – The (x, y) coordinates to check for collision.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if collision detected, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p>Collision detection includes:
+- Wall collision: position is at or beyond game area boundaries
+- Self collision: position overlaps with any part of snake body</p>
+<p>The method checks boundaries against the playable area (excluding
+the border positions) and iterates through the snake deque to
+detect self-intersection.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.cleanup" title="Link to this definition">¶</a></dt>
+<dd><p>Clean up curses environment and restore terminal state.</p>
+<p>Properly shuts down the curses interface by:
+- Disabling cbreak mode (restoring line buffering)
+- Re-enabling echo for normal terminal input
+- Restoring cursor visibility
+- Ending the curses session</p>
+<p>This method is essential for leaving the terminal in a
+usable state after the game exits. Called automatically
+in the finally block of the run() method to ensure
+cleanup occurs even if the game exits unexpectedly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_border">
+<span class="sig-name descname"><span class="pre">draw_border</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_border"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_border" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the dark green border around the game area.</p>
+<p>Creates a visual boundary for the playing field using curses
+border characters. The border is drawn in green with bold
+formatting to make it clearly visible and distinguish the
+game area from the surrounding terminal space.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_food">
+<span class="sig-name descname"><span class="pre">draw_food</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_food"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_food" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the red food item on the game area.</p>
+<p>Renders the food as a circular bullet character “●” in red
+color with bold formatting. Only draws the food if it exists
+(self.food is not None), positioning it at the stored
+coordinates within the game window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_game_over">
+<span class="sig-name descname"><span class="pre">draw_game_over</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_game_over"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_game_over" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the game over screen with final score and restart options.</p>
+<p>Displays centered text on the game area including:
+- “GAME OVER!” message in yellow with bold formatting
+- Final score display in white
+- Restart/quit instructions in white</p>
+<p>All text is centered both horizontally and vertically within
+the game window to create a clear, prominent game over screen
+that provides the player with their final score and next steps.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_instructions">
+<span class="sig-name descname"><span class="pre">draw_instructions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_instructions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_instructions" title="Link to this definition">¶</a></dt>
+<dd><p>Draw game control instructions to the right of the game area.</p>
+<p>Displays a list of available controls and commands:
+- Movement controls (WASD or Arrow Keys)
+- Quit command (‘q’)
+- Restart command (‘r’)</p>
+<p>Instructions are positioned to the right of the game border
+in white text, providing players with easily accessible
+reference for game controls.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_score">
+<span class="sig-name descname"><span class="pre">draw_score</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_score" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the current score at the bottom right outside the game border.</p>
+<p>Displays the score in the format “Score: X” positioned below
+and to the right of the game area. The text is right-aligned
+and rendered in white with bold formatting for visibility.</p>
+<p>Position calculation accounts for:
+- Game window position and dimensions
+- Text length for proper alignment
+- Border spacing for clean layout</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_snake">
+<span class="sig-name descname"><span class="pre">draw_snake</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_snake" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the green snake on the game area.</p>
+<p>Renders each segment of the snake using the block character “█”
+in green color with bold formatting. Iterates through all
+segments in the snake deque and draws them at their respective
+coordinates within the game window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.draw_welcome">
+<span class="sig-name descname"><span class="pre">draw_welcome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.draw_welcome"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.draw_welcome" title="Link to this definition">¶</a></dt>
+<dd><p>Draw the welcome screen and wait for player input to start.</p>
+<p>Displays the initial game screen with:
+- “SNAKE GAME” title in green with bold formatting
+- “Press any key to start!” instruction in white
+- Game border for visual context</p>
+<p>The method temporarily disables non-blocking input to wait
+for a key press before starting the game, then re-enables
+non-blocking mode for gameplay. All text is centered within
+the game window for an attractive welcome presentation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.handle_input">
+<span class="sig-name descname"><span class="pre">handle_input</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.handle_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.handle_input" title="Link to this definition">¶</a></dt>
+<dd><p>Handle keyboard input in a separate thread for real-time control.</p>
+<p>Runs continuously while the game is active, processing keyboard
+input without blocking the main game loop. Supports both WASD
+and arrow key controls with collision prevention (can’t reverse
+directly into snake body).</p>
+<p>Supported controls:
+- W/Up Arrow: Move up (if not currently moving down)
+- S/Down Arrow: Move down (if not currently moving up)
+- A/Left Arrow: Move left (if not currently moving right)
+- D/Right Arrow: Move right (if not currently moving left)
+- Q: Quit game
+- R: Restart game (only when game over)</p>
+<p>Input is case-insensitive. Includes small delay to prevent
+excessive CPU usage while maintaining responsiveness.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.init_curses">
+<span class="sig-name descname"><span class="pre">init_curses</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.init_curses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.init_curses" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize the curses display and configure game window.</p>
+<dl class="simple">
+<dt>Sets up:</dt><dd><ul class="simple">
+<li><p>Main screen with proper input/output settings</p></li>
+<li><p>Input and display options (no echo, non-blocking input)</p></li>
+<li><p>Color pairs for snake, food, border, and text elements</p></li>
+<li><p>Game window with borders and keypad support</p></li>
+<li><p>Non-blocking input for real-time gameplay</p></li>
+</ul>
+</dd>
+<dt>Color pairs defined:</dt><dd><p>1: Green snake on default background
+2: Red food on default background
+3: Green border on default background
+4: White text on default background
+5: Yellow game over text on default background</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.init_snake">
+<span class="sig-name descname"><span class="pre">init_snake</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.init_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.init_snake" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize the snake at the center of the screen.</p>
+<p>Creates a new snake with 3 segments positioned horizontally
+in the center of the game area. The snake starts facing right
+with the head at the center and two body segments trailing
+to the left. This provides a consistent starting state for
+each new game.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.move_snake">
+<span class="sig-name descname"><span class="pre">move_snake</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.move_snake"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.move_snake" title="Link to this definition">¶</a></dt>
+<dd><p>Move the snake in the current direction and handle game logic.</p>
+<p>Performs the core game movement logic:
+1. Calculates new head position based on current direction
+2. Checks for collisions with walls or snake body
+3. Adds new head to snake
+4. Handles food consumption (grows snake, increases score, spawns new food)
+5. Removes tail segment if no food was eaten
+6. Increases game speed slightly when food is consumed</p>
+<p>Sets game_over flag to True if collision is detected.
+Updates score and respawns food when food is consumed.
+Implements speed increase mechanism for progressive difficulty.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.restart_game">
+<span class="sig-name descname"><span class="pre">restart_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.restart_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.restart_game" title="Link to this definition">¶</a></dt>
+<dd><p>Reset the game to its initial state for a fresh start.</p>
+<p>Clears all game state and reinitializes core components:
+- Clears snake body
+- Resets score to 0
+- Sets direction back to RIGHT
+- Clears game over flag
+- Resets game speed to initial value
+- Reinitializes snake position
+- Spawns new food</p>
+<p>This method is called when the player presses ‘R’ during
+the game over screen, allowing for immediate replay without
+restarting the entire program.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.run" title="Link to this definition">¶</a></dt>
+<dd><p>Main game execution method that runs the complete game loop.</p>
+<p>Orchestrates the entire game flow:</p>
+<ol class="arabic simple">
+<li><p>Shows welcome screen and waits for start</p></li>
+<li><p>Initializes snake and food</p></li>
+<li><p>Starts input handling thread for real-time controls</p></li>
+<li><dl class="simple">
+<dt>Runs main game loop until quit/exit:</dt><dd><ul class="simple">
+<li><p>Updates snake direction from input</p></li>
+<li><p>Moves snake (if game not over)</p></li>
+<li><p>Updates display</p></li>
+<li><p>Controls game speed with delay</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Handles cleanup on exit</p></li>
+</ol>
+<dl class="simple">
+<dt>Exception Handling:</dt><dd><ul class="simple">
+<li><p>Catches KeyboardInterrupt (Ctrl+C) for graceful exit.</p></li>
+<li><p>Ensures proper curses cleanup in finally block.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The method uses threading for input handling to maintain
+responsive controls while managing game timing and display
+updates in the main thread.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.spawn_food">
+<span class="sig-name descname"><span class="pre">spawn_food</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.spawn_food"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.spawn_food" title="Link to this definition">¶</a></dt>
+<dd><p>Spawn food at a random empty location within the game area.</p>
+<p>Continuously generates random coordinates within the playable
+area (excluding border positions) until finding a location
+that doesn’t overlap with any part of the snake’s body.
+This ensures food is always accessible and visible to the player.</p>
+<p>The food coordinates are stored in self.food as a tuple (x, y).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.update_display">
+<span class="sig-name descname"><span class="pre">update_display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.update_display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.update_display" title="Link to this definition">¶</a></dt>
+<dd><p>Update the entire game display with current game state.</p>
+<p>Performs a complete refresh of all visual elements:
+1. Clears the game area (preserving border)
+2. Draws game border
+3. Draws snake at current position
+4. Draws food at current position
+5. Shows game over screen if applicable
+6. Updates score display
+7. Updates instruction display
+8. Refreshes both main screen and game window</p>
+<p>This method is called every game loop iteration to ensure
+the display accurately reflects the current game state.
+The clearing and redrawing approach prevents visual artifacts
+and ensures clean animation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakerun.SnakeGame.window_terminal_validity">
+<span class="sig-name descname"><span class="pre">window_terminal_validity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/snakerun.html#SnakeGame.window_terminal_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snakerun.SnakeGame.window_terminal_validity" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the current terminal size is sufficient for the game.</p>
+<p>Validates that the terminal dimensions are large enough to display
+the game area plus borders and UI elements. The minimum required
+size accounts for the game area plus 4 additional characters for
+borders and spacing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – If the terminal is smaller than required dimensions
+    (height+4 x width+4). Includes current and required
+    dimensions in the error message.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+
+          <div class="sidebar-resize-handle"></div>
+
+<h3><a href="index.html">Table of Contents</a></h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html">snakerun</a></li>
+</ul>
+</li>
+</ul>
+
+<div><hr class="docutils"></div>
+<ul>
+  <li class="toctree-l1"><a class="reference internal" href="genindex.html" accesskey="I">General Index</a></li>
+  <li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python Module Index</a></li>
+</ul>
+<div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <nav class="relbar">
+      <a class="previous" href="modules.html" aria-label="Previous topic" >
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+        </div>
+        <div class="title">
+          <span class="text">
+            <span class="direction">previous</span>
+            snakerun
+          </span>
+        </div>
+      </a>
+    </nav>
+
+    <footer role="contentinfo">
+      &#169; Copyright 2025, Ishan Bhat.
+      Created using <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+      <a class="reference external" href="https://insipid-sphinx-theme.readthedocs.io/">Insipid Theme</a>.
+<a class="reference internal" href="_sources/snakerun.rst.txt" rel="nofollow">Show Source</a>.
+    </footer>
+  </body>
+</html>
