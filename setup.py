@@ -17,6 +17,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 install_requires = read_requirements("requirements.txt")
 test_requires = read_requirements("requirements_test.txt")
 dev_requires = read_requirements("requirements_dev.txt")
+docs_requires = read_requirements("requirements_docs.txt")
 
 setup(
     name="snakerun",
@@ -31,7 +32,8 @@ setup(
     extras_require={
         "test": test_requires,
         "dev": dev_requires,
-        "all": test_requires + dev_requires,
+        "docs": docs_requires,
+        "all": test_requires + dev_requires + docs_requires,
     },
     classifiers=[
         "Development Status :: 4 - Beta",
