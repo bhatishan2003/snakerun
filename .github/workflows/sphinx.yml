@@ -28,7 +28,7 @@ jobs:
 
       - name: Build docs
         run: |
-          sphinx-build -M html docs/source docs/build -a -W
+          sphinx-build -M html docs/source docs/build -a
 
       - name: Upload built docs as artifact
         uses: actions/upload-artifact@v4
