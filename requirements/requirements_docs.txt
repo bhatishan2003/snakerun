@@ -1,2 +1,2 @@
-insipid
+insipid-sphinx-theme
 sphinx
