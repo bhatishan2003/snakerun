@@ -525,24 +525,26 @@ class SnakeGame:
         Main game execution method that runs the complete game loop.
 
         Orchestrates the entire game flow:
+
         1. Shows welcome screen and waits for start
         2. Initializes snake and food
         3. Starts input handling thread for real-time controls
         4. Runs main game loop until quit/exit:
-           - Updates snake direction from input
-           - Moves snake (if game not over)
-           - Updates display
-           - Controls game speed with delay
+            - Updates snake direction from input
+            - Moves snake (if game not over)
+            - Updates display
+            - Controls game speed with delay
         5. Handles cleanup on exit
 
-        Exception handling:
-        - Catches KeyboardInterrupt (Ctrl+C) for graceful exit
-        - Ensures proper curses cleanup in finally block
+        Exception Handling:
+            - Catches KeyboardInterrupt (Ctrl+C) for graceful exit.
+            - Ensures proper curses cleanup in finally block.
 
         The method uses threading for input handling to maintain
         responsive controls while managing game timing and display
         updates in the main thread.
         """
+
         try:
             # Show welcome screen
             self.draw_welcome()
