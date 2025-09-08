@@ -58,6 +58,36 @@ pip install -e .[test]
 pytest -v
 ```
 
+## Versioning
+
+We use [bump-my-version](https://github.com/callowayproject/bump-my-version) to manage version numbers consistently.
+
+### Install
+
+```bash
+pip install .[dev]
+```
+
+### Bump Version Options
+
+-   Patch (bug fixes, backward compatible):
+
+    ```bash
+    bump-my-version bump patch
+    ```
+
+-   Minor (new features, backward compatible):
+
+    ```bash
+    bump-my-version bump minor
+    ```
+
+-   Major (breaking changes):
+
+    ```bash
+    bump-my-version bump major
+    ```
+
 ## Release Notes
 
 -   Always run test cases.
