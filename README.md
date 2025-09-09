@@ -6,7 +6,7 @@ A classic Snake game implemented in **Python** and played via cli.
 [![Python Versions](https://img.shields.io/pypi/pyversions/snakerun.svg)](https://pypi.org/project/snakerun/)
 [![License](https://img.shields.io/github/license/bhatishan2003/snakerun)](LICENSE)
 [![Python application](https://github.com/bhatishan2003/snakerun/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhatishan2003/snakerun/actions/workflows/python-app.yml)
-[![Coverage](https://img.shields.io/codecov/c/github/bhatishan2003/snakerun)](https://codecov.io/gh/bhatishan2003/snakerun)
+[![Build and Deploy Sphinx Docs](https://github.com/bhatishan2003/snakerun/actions/workflows/sphinx.yml/badge.svg)](https://github.com/bhatishan2003/snakerun/actions/workflows/sphinx.yml)
 
 ## Table of Contents <!-- omit in toc -->
 
